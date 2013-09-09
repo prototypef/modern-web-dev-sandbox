@@ -30,6 +30,24 @@ module.exports = function(grunt) {
         src: jsAppSourceFiles
       }
     },
+    compass: {
+      clean: {
+        options: {
+          clean: true
+        }
+      },
+      dev: {
+        options: {
+          environment: 'development'
+        }
+      },
+      prod: {
+        options: {
+          environment: 'production',
+          outputStyle: 'compressed'
+        }
+      }
+    },
     concat: {
       dev: {
         files: [
@@ -54,10 +72,22 @@ module.exports = function(grunt) {
 
   // Load the plugin tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat:dev']);
-  grunt.registerTask('build-prod', ['jshint', 'uglify:prod']);
+  grunt.registerTask('default', [
+    'jshint',
+    'compass:clean',
+    'compass:dev',
+    'concat:dev'
+  ]);
+
+  grunt.registerTask('build-prod', [
+    'jshint',
+    'compass:clean',
+    'compass:prod',
+    'uglify:prod'
+  ]);
 };
