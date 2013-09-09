@@ -68,6 +68,16 @@ module.exports = function(grunt) {
         ]
       },
     },
+    watch: {
+      styles: {
+        files: ['sass/*.scss'],
+        tasks: ['compass:dev']
+      },
+      scripts: {
+        files: jsAppSourceFiles,
+        tasks: ['concat:dev']
+      }
+    }
   });
 
   // Load the plugin tasks.
@@ -75,6 +85,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', [
