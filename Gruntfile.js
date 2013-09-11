@@ -13,7 +13,8 @@ module.exports = function(grunt) {
 
   // Declare the App's source files
   var jsAppSourceFiles = [
-    'js-src/app.js'
+    'js-src/app.js',
+    'js-src/views/login.js'
   ];
 
   // Concatenate our file arrays to create a bundle we can use later
@@ -48,8 +49,13 @@ module.exports = function(grunt) {
         }
       }
     },
-    concat: {
-      dev: {
+    uglify: {
+      dist: {
+        options: {
+          sourceMap: 'js/source.map',
+          sourceMappingURL: '/js/source.map',
+          sourceMapRoot: '/'
+        },
         files: [
           {
             src: jsSourceFiles,
@@ -57,16 +63,6 @@ module.exports = function(grunt) {
           }
         ]
       }
-    },
-    uglify: {
-      prod: {
-        files: [
-          {
-            src: jsSourceFiles,
-            dest: 'js/app.js'
-          }
-        ]
-      },
     },
     watch: {
       styles: {
@@ -75,7 +71,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: jsAppSourceFiles,
-        tasks: ['concat:dev']
+        tasks: ['uglify:dist']
       }
     }
   });
@@ -83,7 +79,6 @@ module.exports = function(grunt) {
   // Load the plugin tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
@@ -92,13 +87,13 @@ module.exports = function(grunt) {
     'jshint',
     'compass:clean',
     'compass:dev',
-    'concat:dev'
+    'uglify:dist'
   ]);
 
   grunt.registerTask('build-prod', [
     'jshint',
     'compass:clean',
     'compass:prod',
-    'uglify:prod'
+    'uglify:dist'
   ]);
 };
