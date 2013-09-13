@@ -44,6 +44,12 @@ module.exports = function(grunt) {
     },
     usemin: {
       html: 'index.html'
+    },
+    rev: {
+      files: [
+        'js/app.js',
+        'stylesheets/*.css'
+      ]
     }
   });
 
@@ -54,6 +60,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-rev');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -69,6 +76,7 @@ module.exports = function(grunt) {
     'useminPrepare',
     'concat',
     'uglify',
+    'rev',
     'usemin'
   ]);
 };
