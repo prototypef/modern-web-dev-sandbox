@@ -50,6 +50,14 @@ module.exports = function(grunt) {
         'js/app.js',
         'stylesheets/*.css'
       ]
+    },
+    version: {
+      defaults: {
+        options: {
+          prefix: 'App.VERSION\\s+=\\s+[\'"]'
+        },
+        src: ['js-src/app.js']
+      }
     }
   });
 
@@ -61,6 +69,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-rev');
+  grunt.loadNpmTasks('grunt-version');
 
   // Default task(s).
   grunt.registerTask('default', [

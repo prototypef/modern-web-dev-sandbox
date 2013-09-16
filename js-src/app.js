@@ -5,6 +5,8 @@
     LOG_TRANSITIONS: true
   });
 
+  App.VERSION = '0.0.0';
+
   window.App = App;
 
   // App code begins here...
