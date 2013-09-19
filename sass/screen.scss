@@ -4,7 +4,31 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+@import "compass/css3/inline-block";
+
+$baseGutter: 10px;
+
+// Create sprite image for our "icon" folder
+$icon-sprite-dimensions: true;
+@import "icon/*.png";
+@include all-icon-sprites;
 
 body {
   background-color: darken(white, 10);
+  background-image-height: 10px;
+  padding: $baseGutter * 5;
+}
+
+h1 {
+  padding: ($baseGutter * 2) 0;
+}
+
+.logo {
+  @include inline-block();
+
+  margin-right: $baseGutter * 2;
+
+  &.logo-2 {
+    @extend .icon-map;
+  }
 }
