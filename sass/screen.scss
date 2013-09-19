@@ -13,9 +13,14 @@ $icon-sprite-dimensions: true;
 @import "icon/*.png";
 @include all-icon-sprites;
 
+@mixin bg-inline-image($image) {
+    background-image: inline-image($image);
+    height: image-height($image);
+    width: image-width($image);
+}
+
 body {
   background-color: darken(white, 10);
-  background-image-height: 10px;
   padding: $baseGutter * 5;
 }
 
@@ -28,7 +33,11 @@ h1 {
 
   margin-right: $baseGutter * 2;
 
+  &.logo-1 {
+    @include bg-inline-image("icon/compass.png");
+  }
+
   &.logo-2 {
-    @extend .icon-map;
+    @include bg-inline-image("icon/map.png");
   }
 }
