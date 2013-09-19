@@ -58,6 +58,15 @@ module.exports = function(grunt) {
         },
         src: ['js-src/app.js']
       }
+    },
+    cdn: {
+      options: {
+        cdn: 'http://cdn.localhost/',
+        flatten: true
+      },
+      dist: {
+        src: 'index.html'
+      }
     }
   });
 
@@ -70,6 +79,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-rev');
   grunt.loadNpmTasks('grunt-version');
+  grunt.loadNpmTasks('grunt-cdn');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -86,6 +96,7 @@ module.exports = function(grunt) {
     'concat',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'cdn'
   ]);
 };
