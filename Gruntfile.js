@@ -3,6 +3,7 @@ module.exports = function(grunt) {
 
   // Declare the App's source files
   var jsAppSourceFiles = grunt.file.expand('js-src/**/*.js');
+  var imgFolder = "images";
 
   // Project configuration.
   grunt.initConfig({
@@ -67,6 +68,21 @@ module.exports = function(grunt) {
       dist: {
         src: 'index.html'
       }
+    },
+    imagemin: {
+      png: {
+        options: {
+          optimizationLevel: 7
+        },
+        files: [
+          {
+            expand: true,
+            cwd: imgFolder,
+            src: ['icon-*.png'],
+            dest: imgFolder
+          }
+        ]
+      }
     }
   });
 
@@ -80,6 +96,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-rev');
   grunt.loadNpmTasks('grunt-version');
   grunt.loadNpmTasks('grunt-cdn');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -92,6 +109,7 @@ module.exports = function(grunt) {
     'jshint',
     'compass:clean',
     'compass:prod',
+    'imagemin',
     'useminPrepare',
     'concat',
     'uglify',

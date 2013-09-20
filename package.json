@@ -12,6 +12,7 @@
     "grunt-usemin": "~0.1.12",
     "grunt-rev": "~0.1.0",
     "grunt-version": "~0.2.2",
-    "grunt-cdn": "~0.2.3"
+    "grunt-cdn": "~0.2.3",
+    "grunt-contrib-imagemin": "~0.3.0"
   }
 }
