@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 
   // Declare the App's source files
   var jsAppSourceFiles = grunt.file.expand('js-src/**/*.js');
-  var imgFolder = "images";
+  var imgFolder = 'images';
+  var jsAppFinalTarget = 'js/app.js';
 
   // Project configuration.
   grunt.initConfig({
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
     },
     rev: {
       files: [
-        'js/app.js',
+        jsAppFinalTarget,
         'stylesheets/*.css'
       ]
     },
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
         options: {
           prefix: 'App.VERSION\\s+=\\s+[\'"]'
         },
-        src: ['js-src/app.js']
+        src: [jsAppFinalTarget]
       }
     },
     cdn: {
@@ -83,6 +84,25 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    uglify: {
+      options: {
+        compress: {
+          dead_code: true
+        }
+      }
+    },
+    override_has: {
+      prod: {
+        options: {
+          tests: {
+            debug: false
+          }
+        },
+        files: [
+          { src: jsAppFinalTarget, dest: jsAppFinalTarget }
+        ]
+      }
     }
   });
 
@@ -97,6 +117,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-version');
   grunt.loadNpmTasks('grunt-cdn');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-override-has');
 
   // Default task(s).
   grunt.registerTask('default', [
@@ -112,9 +133,9 @@ module.exports = function(grunt) {
     'imagemin',
     'useminPrepare',
     'concat',
+    'override_has:prod',
     'uglify',
     'rev',
-    'usemin',
-    'cdn'
+    'usemin'
   ]);
 };

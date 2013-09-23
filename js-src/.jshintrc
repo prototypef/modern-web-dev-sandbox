@@ -4,8 +4,10 @@
   "globals": {
     "_": false,
     "$": false,
+    "console": false,
     "Ember": false,
-    "accounting": false
+    "accounting": false,
+    "has": false
   },
   "globalstrict": true,
   "quotmark": true,

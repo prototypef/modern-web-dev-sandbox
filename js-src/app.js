@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  has.add('debug', function(){
+    return true;
+  }, true);
+
   var App = Ember.Application.create({
     LOG_TRANSITIONS: true
   });
@@ -10,4 +14,7 @@
   window.App = App;
 
   // App code begins here...
+  if (has('debug')) {
+    console.log('Congrats! You are in DEBUG mode');
+  }
 })();
